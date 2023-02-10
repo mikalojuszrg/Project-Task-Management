@@ -25,12 +25,8 @@ const Login = () => {
         {() => (
           <Form>
             <h1>Login</h1>
-            <FormikInput name="username" placeholder="Username" />
-            <FormikInput
-              type="password"
-              name="password"
-              placeholder="Password"
-            />
+            <FormikInput name="username" label="Username" />
+            <FormikInput type="password" name="password" label="Password" />
             <button type="submit">Login</button>
           </Form>
         )}

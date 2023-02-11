@@ -3,7 +3,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import FormikInput from "../../components/FormikInput/FormikInput";
 import { UserContext } from "../../contexts/UserContext";
-import { createTask } from "../../api/task";
+import { createTask, getTasks } from "../../api/task";
 import { TaskContext } from "../../contexts/TaskContext";
 
 const validationSchema = Yup.object().shape({
@@ -12,14 +12,14 @@ const validationSchema = Yup.object().shape({
 
 const TaskInput = () => {
   const { user } = useContext(UserContext);
-  const { setTasks, tasks } = useContext(TaskContext);
-  console.log(user);
+  const { setTasks, tasks, toggleTaskCreated } = useContext(TaskContext);
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     const { username } = user;
     const createdNote = { ...values, username };
-    createTask(createdNote);
-    setTasks([values, ...tasks]);
+    await createTask(createdNote);
+
+    toggleTaskCreated();
   };
 
   return (

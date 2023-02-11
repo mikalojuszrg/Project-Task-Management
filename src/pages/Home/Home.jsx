@@ -1,16 +1,27 @@
 import { useContext } from "react";
+import { deleteTask } from "../../api/task";
 import Task from "../../components/Task/Task";
 import TaskInput from "../../components/TaskInput/TaskInput";
 import { TaskContext } from "../../contexts/TaskContext";
 
 const Home = () => {
-  const { tasks } = useContext(TaskContext);
+  const { tasks, setTasks } = useContext(TaskContext);
+
+  const handleDelete = (id) => {
+    deleteTask(id);
+    const updatedTasks = tasks.filter((task) => task.id !== id);
+    setTasks(updatedTasks);
+  };
 
   return (
     <div>
       <TaskInput />
       {tasks.map((task) => (
-        <Task task={task.task} />
+        <Task
+          key={task.id}
+          task={task.task}
+          handleDelete={() => handleDelete(task.id)}
+        />
       ))}
     </div>
   );

@@ -7,6 +7,7 @@ import { registrationInputs } from "../../consts/registrationInputs";
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Required"),
   surname: Yup.string().required("Required"),
+  username: Yup.string().required("Required"),
   email: Yup.string().email().required("Required"),
   password: Yup.string().required("Required"),
   confirmPassword: Yup.string()
@@ -15,8 +16,10 @@ const validationSchema = Yup.object().shape({
 });
 
 const Register = () => {
-  const handleSubmit = (values) => {
-    createUser(values);
+  const handleSubmit = (values, { resetForm }) => {
+    const { confirmPassword, ...userInfo } = values;
+    createUser(userInfo);
+    resetForm();
   };
 
   return (
@@ -25,6 +28,7 @@ const Register = () => {
         initialValues={{
           name: "",
           surname: "",
+          username: "",
           email: "",
           password: "",
           confirmPassword: "",

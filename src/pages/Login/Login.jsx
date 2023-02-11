@@ -17,10 +17,12 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (values) => {
-    loginUser(values).then((response) => {
-      setUser(response);
-    });
-    navigate(HOME_PATH).catch((error) => console.log("Failed to login", error));
+    loginUser(values)
+      .then((response) => {
+        setUser(response);
+        navigate(HOME_PATH);
+      })
+      .catch((error) => console.log("Failed to login", error));
   };
 
   return (

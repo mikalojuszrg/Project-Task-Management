@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useContext } from "react";
 import { deleteTask } from "../../api/task";
 import Task from "../../components/Task/Task";
@@ -20,6 +21,7 @@ const Home = () => {
         <Task
           key={task.id}
           task={task.task}
+          id={task.id}
           handleDelete={() => handleDelete(task.id)}
         />
       ))}

@@ -12,14 +12,14 @@ const validationSchema = Yup.object().shape({
 
 const TaskInput = () => {
   const { user } = useContext(UserContext);
-  const { setTasks, tasks, toggleTaskCreated } = useContext(TaskContext);
+  const { toggleTaskCreated } = useContext(TaskContext);
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values, { resetForm }) => {
     const { username } = user;
     const createdNote = { ...values, username };
     await createTask(createdNote);
-
     toggleTaskCreated();
+    resetForm();
   };
 
   return (

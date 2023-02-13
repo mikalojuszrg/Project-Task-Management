@@ -3,9 +3,9 @@ import { Formik, Form } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { TASKS_PATH } from "../../routes/const";
-import { loginUser } from "../../api/user";
 import FormikInput from "../../components/FormikInput/FormikInput";
 import { UserContext } from "../../contexts/UserContext";
+import { useLoginUser } from "../../hooks/user";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required("Required"),
@@ -14,6 +14,7 @@ const validationSchema = Yup.object().shape({
 
 const Login = () => {
   const { setUser } = useContext(UserContext);
+  const { mutateAsync: loginUser } = useLoginUser();
   const navigate = useNavigate();
 
   const handleSubmit = (values) => {

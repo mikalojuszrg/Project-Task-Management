@@ -8,8 +8,6 @@ const NoteProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
   const [taskCreated, setTaskCreated] = useState(false);
   const { user } = useContext(UserContext);
-  console.log(tasks);
-  console.log(user);
 
   const toggleTaskCreated = () => {
     setTaskCreated((prevValue) => !prevValue);

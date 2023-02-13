@@ -1,9 +1,9 @@
 import { Formik, Form } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { createUser } from "../../api/user";
 import FormikInput from "../../components/FormikInput/FormikInput";
 import { registrationInputs } from "../../consts/registrationInputs";
+import { useCreateUser } from "../../hooks/user";
 import { LOGIN_PATH } from "../../routes/const";
 
 const validationSchema = Yup.object().shape({
@@ -19,11 +19,14 @@ const validationSchema = Yup.object().shape({
 
 const Register = () => {
   const navigate = useNavigate();
+  const { mutateAsync: createUser } = useCreateUser();
+
   const handleSubmit = (values, { resetForm }) => {
     const { confirmPassword, ...userInfo } = values;
     createUser(userInfo);
     resetForm();
     navigate(LOGIN_PATH);
+    console.log("created");
   };
 
   return (

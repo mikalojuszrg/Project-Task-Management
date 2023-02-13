@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Formik, Form } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { HOME_PATH } from "../../routes/const";
+import { TASKS_PATH } from "../../routes/const";
 import { loginUser } from "../../api/user";
 import FormikInput from "../../components/FormikInput/FormikInput";
 import { UserContext } from "../../contexts/UserContext";
@@ -20,7 +20,7 @@ const Login = () => {
     loginUser(values)
       .then((response) => {
         setUser(response);
-        navigate(HOME_PATH);
+        navigate(TASKS_PATH);
       })
       .catch((error) => console.log("Failed to login", error));
   };

@@ -17,13 +17,13 @@ export const deleteTask = async (id) => {
   return response.data;
 };
 
-export const updateTask = async (id, task, username) => {
+export const updateTask = async (id, newValue, username) => {
   console.log(id);
-  console.log(task);
+  console.log(newValue);
   console.log(username);
   const response = await axios.put(`${TASKS_API_URL}/${id}`, {
-    task,
-    username,
+    task: newValue,
+    username: username,
   });
   return response.data;
 };

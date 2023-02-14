@@ -12,7 +12,9 @@ export const useCreateTask = () => {
 };
 
 export const useUpdateTask = () => {
-  return useMutation(updateTask);
+  return useMutation((params) =>
+    updateTask(params.id, params.newValue, params.username)
+  );
 };
 
 export const useDeleteTask = () => {

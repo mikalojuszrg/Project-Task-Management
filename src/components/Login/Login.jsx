@@ -3,9 +3,10 @@ import { Formik, Form } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { TASKS_PATH } from "../../routes/const";
-import FormikInput from "../../components/FormikInput/FormikInput";
+import FormikInput from "../FormikInput/FormikInput";
 import { UserContext } from "../../contexts/UserContext";
 import { useLoginUser } from "../../hooks/user";
+import styles from "./Login.module.scss";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required("Required"),
@@ -37,8 +38,8 @@ const Login = () => {
         onSubmit={handleSubmit}
       >
         {() => (
-          <Form>
-            <h1>Login</h1>
+          <Form className={styles.form}>
+            <h1 className={styles.form__heading}>Login</h1>
             <FormikInput name="username" label="Username" />
             <FormikInput type="password" name="password" label="Password" />
             <button type="submit">Login</button>

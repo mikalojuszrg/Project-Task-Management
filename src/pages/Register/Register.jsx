@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import FormikInput from "../../components/FormikInput/FormikInput";
 import { registrationInputs } from "../../consts/registrationInputs";
 import { useCreateUser } from "../../hooks/user";
-import { LOGIN_PATH } from "../../routes/const";
+import { HOME_PATH } from "../../routes/const";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Required"),
@@ -25,7 +25,7 @@ const Register = () => {
     const { confirmPassword, ...userInfo } = values;
     createUser(userInfo);
     resetForm();
-    navigate(LOGIN_PATH);
+    navigate(HOME_PATH);
     console.log("created");
   };
 

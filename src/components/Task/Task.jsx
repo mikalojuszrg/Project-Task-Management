@@ -13,6 +13,7 @@ const Task = ({ id, task, handleDelete }) => {
   const handleUpdate = async (id) => {
     try {
       await updateTask({ id, newValue, username });
+      setIsUpdating(false);
     } catch (error) {
       console.error(error);
     }

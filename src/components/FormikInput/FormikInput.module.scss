@@ -1,0 +1,27 @@
+@use "../../sass/utils/colorVariables.scss" as color;
+
+.input {
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+  }
+
+  &__field {
+    padding: 1.5rem;
+    width: 25rem;
+    border-radius: 1rem;
+    border: 0;
+    margin-bottom: 1rem;
+  }
+
+  &__error {
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 0.2rem;
+    margin-bottom: 1rem;
+    color: color.$outline-color;
+  }
+}

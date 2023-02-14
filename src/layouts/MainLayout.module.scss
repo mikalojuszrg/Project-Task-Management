@@ -1,0 +1,17 @@
+@use "../sass/utils/colorVariables.scss" as color;
+
+.wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: color.$base-color-dark;
+}
+
+.container {
+  display: flex;
+  height: 97%;
+  width: 97%;
+  border-radius: 1rem;
+  background-color: color.$base-color-light;
+}

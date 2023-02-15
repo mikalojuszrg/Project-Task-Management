@@ -4,6 +4,7 @@ import {
   deleteTask,
   getTasks,
   updateTask,
+  updateTaskCompleted,
   updateTaskImportant,
 } from "../api/task";
 
@@ -18,9 +19,7 @@ export const useCreateTask = () => {
 };
 
 export const useUpdateTask = () => {
-  return useMutation((params) =>
-    updateTask(params.id, params.newValue, params.username)
-  );
+  return useMutation((task) => updateTask(task));
 };
 
 export const useDeleteTask = () => {
@@ -30,5 +29,11 @@ export const useDeleteTask = () => {
 export const useTaskImportant = () => {
   return useMutation((params) =>
     updateTaskImportant(params.id, params.task, params.username)
+  );
+};
+
+export const useTaskCompleted = () => {
+  return useMutation((params) =>
+    updateTaskCompleted(params.id, params.task, params.username)
   );
 };

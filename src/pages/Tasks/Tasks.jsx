@@ -3,6 +3,7 @@ import Task from "../../components/Task/Task";
 import TaskInput from "../../components/TaskInput/TaskInput";
 import { UserContext } from "../../contexts/UserContext";
 import { useDeleteTask, useTasks } from "../../hooks/tasks";
+import { getCompletedTasks } from "../../utils/completedTasks";
 import { getGeneralTasks } from "../../utils/generalTasks";
 import { getImportantTasks } from "../../utils/importantTasks";
 import styles from "./Tasks.module.scss";
@@ -16,6 +17,7 @@ const Tasks = () => {
 
   const importantTasks = getImportantTasks(tasks);
   const generalTasks = getGeneralTasks(tasks);
+  const completedTasks = getCompletedTasks(tasks);
 
   const handleDelete = async (id) => {
     await deleteTask(id);
@@ -48,7 +50,16 @@ const Tasks = () => {
             />
           ))}
         </div>
-        <div>Completed</div>
+        <div>
+          {completedTasks.map((task) => (
+            <Task
+              key={task.id}
+              task={task.task}
+              id={task.id}
+              handleDelete={() => handleDelete(task.id)}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

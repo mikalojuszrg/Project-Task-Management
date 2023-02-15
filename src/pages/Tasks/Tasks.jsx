@@ -3,6 +3,7 @@ import Task from "../../components/Task/Task";
 import TaskInput from "../../components/TaskInput/TaskInput";
 import { UserContext } from "../../contexts/UserContext";
 import { useDeleteTask, useTasks } from "../../hooks/tasks";
+import styles from "./Tasks.module.scss";
 
 const Tasks = () => {
   const { user } = useContext(UserContext);
@@ -16,18 +17,26 @@ const Tasks = () => {
     await refetch();
   };
   return (
-    <div>
-      <h2>Welcome, {name}!</h2>
-      <TaskInput />
-      {tasks.map((task) => (
-        <Task
-          key={task.id}
-          task={task.task}
-          id={task.id}
-          handleDelete={() => handleDelete(task.id)}
-        />
-      ))}
-    </div>
+    <section className={styles.container}>
+      <div className={styles.container__newTask}>
+        <h2 className={styles.container__welcome}>Welcome, {name}!</h2>
+        <TaskInput />
+      </div>
+      <div className={styles.tasks}>
+        <div>
+          {tasks.map((task) => (
+            <Task
+              key={task.id}
+              task={task.task}
+              id={task.id}
+              handleDelete={() => handleDelete(task.id)}
+            />
+          ))}
+        </div>
+        <div>Important</div>
+        <div>Completed</div>
+      </div>
+    </section>
   );
 };
 

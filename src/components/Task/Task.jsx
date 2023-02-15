@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
-import { useUpdateTask } from "../../hooks/tasks";
+import { useTaskImportant, useTasks, useUpdateTask } from "../../hooks/tasks";
 
 const Task = ({ id, task, handleDelete }) => {
   const { user } = useContext(UserContext);
   const { username } = user;
+  const { refetch } = useTasks();
+  const { mutateAsync: updateTaskImportant } = useTaskImportant();
   const { mutateAsync: updateTask } = useUpdateTask();
   const [isUpdating, setIsUpdating] = useState(false);
   const [newValue, setNewValue] = useState(task);
@@ -19,6 +21,15 @@ const Task = ({ id, task, handleDelete }) => {
     }
   };
 
+  const handleImportant = async (id) => {
+    try {
+      await updateTaskImportant({ id, task, username });
+      await refetch();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div>
       {isUpdating ? (
@@ -27,6 +38,7 @@ const Task = ({ id, task, handleDelete }) => {
         <h2>{task}</h2>
       )}
       <button onClick={handleDelete}>Delete</button>
+      <button onClick={() => handleImportant(id)}>Important</button>
       <button onClick={() => setIsUpdating(true)}>Update</button>
       {isUpdating && <button onClick={() => handleUpdate(id)}>Save</button>}
     </div>
@@ -34,22 +46,3 @@ const Task = ({ id, task, handleDelete }) => {
 };
 
 export default Task;
-
-// const handleUpdate = (id) => {
-//   const { username } = user;
-//   console.log(username);
-//   const updatedTasks = tasks.map((t) => {
-//     if (t.id === id) {
-//       return {
-//         ...t,
-//         task: newValue,
-//         username: username,
-//       };
-//     }
-//     return t;
-//   });
-//   setTasks(updatedTasks);
-//   setIsUpdating(false);
-//   updateTask(id, newValue, username);
-//   console.log(updatedTasks);
-// };

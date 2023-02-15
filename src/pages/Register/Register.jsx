@@ -1,10 +1,12 @@
 import { Formik, Form } from "formik";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import Button from "../../components/Button/Button";
 import FormikInput from "../../components/FormikInput/FormikInput";
 import { registrationInputs } from "../../consts/registrationInputs";
 import { useCreateUser } from "../../hooks/user";
 import { HOME_PATH } from "../../routes/const";
+import styles from "./Register.module.scss";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Required"),
@@ -30,7 +32,7 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <section className={styles.container}>
       <Formik
         initialValues={{
           name: "",
@@ -45,7 +47,7 @@ const Register = () => {
       >
         {() => (
           <Form>
-            <h1>Register</h1>
+            <h1 className={styles.container__heading}>REGISTER</h1>
             {registrationInputs.map((input) => (
               <FormikInput
                 key={input.name}
@@ -54,11 +56,16 @@ const Register = () => {
                 label={input.label}
               />
             ))}
-            <button type="submit">Register</button>
+            <Button variant="primary" type="submit">
+              Register
+            </Button>
+            <p className={styles.container__info}>
+              Already have an account? <Link to={HOME_PATH}>Log in</Link>{" "}
+            </p>
           </Form>
         )}
       </Formik>
-    </div>
+    </section>
   );
 };
 

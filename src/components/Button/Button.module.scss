@@ -1,0 +1,17 @@
+@use "../../sass/utils/colorVariables.scss" as color;
+
+.button {
+  border: 0;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &--primary {
+    background-color: color.$primary-color-dark;
+    color: color.$primary-color-light;
+  }
+}

@@ -7,6 +7,7 @@ import FormikInput from "../FormikInput/FormikInput";
 import { UserContext } from "../../contexts/UserContext";
 import { useLoginUser } from "../../hooks/user";
 import styles from "./Login.module.scss";
+import Button from "../Button/Button";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required("Required"),
@@ -39,10 +40,12 @@ const Login = () => {
       >
         {() => (
           <Form className={styles.form}>
-            <h1 className={styles.form__heading}>Login</h1>
+            <h1 className={styles.form__heading}>LOGIN</h1>
             <FormikInput name="username" label="Username" />
             <FormikInput type="password" name="password" label="Password" />
-            <button type="submit">Login</button>
+            <Button variant="primary" type="submit">
+              Login
+            </Button>
           </Form>
         )}
       </Formik>

@@ -7,5 +7,14 @@
   &__heading {
     font-size: 2.5rem;
     text-align: center;
+    border: 1px solid black;
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+
+  &__info {
+    margin: 0 auto;
+    margin-top: 1rem;
+    font-size: 1.3rem;
   }
 }

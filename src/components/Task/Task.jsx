@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { AiOutlineCheckCircle, AiOutlineDelete } from "react-icons/ai";
+import { FiEdit } from "react-icons/fi";
+import { BsBookmarkCheck } from "react-icons/bs";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import {
@@ -7,6 +10,8 @@ import {
   useTasks,
   useUpdateTask,
 } from "../../hooks/tasks";
+import Button from "../Button/Button";
+import styles from "./Task.module.scss";
 
 const Task = ({ id, task, handleDelete }) => {
   const { user } = useContext(UserContext);
@@ -57,17 +62,31 @@ const Task = ({ id, task, handleDelete }) => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       {isUpdating ? (
         <input value={newValue} onChange={(e) => setNewValue(e.target.value)} />
       ) : (
         <h2>{task}</h2>
       )}
-      <button onClick={handleDelete}>Delete</button>
-      <button onClick={() => handleImportant(id)}>Important</button>
-      <button onClick={() => setIsUpdating(true)}>Update</button>
-      <button onClick={() => handleCompleted(id)}>Complete</button>
-      {isUpdating && <button onClick={() => handleUpdate(id)}>Save</button>}
+      <div className={styles.container__buttons}>
+        <Button variant="secondary" onClick={handleDelete}>
+          <AiOutlineDelete style={{ fill: "#DD4242" }} />
+        </Button>
+        <Button variant="secondary" onClick={() => handleImportant(id)}>
+          <BsBookmarkCheck style={{ fill: "#3790bf" }} />
+        </Button>
+        <Button variant="secondary" onClick={() => setIsUpdating(true)}>
+          <FiEdit />
+        </Button>
+        <Button variant="secondary" onClick={() => handleCompleted(id)}>
+          <AiOutlineCheckCircle style={{ fill: "#12ac0d" }} />
+        </Button>
+        {isUpdating && (
+          <Button variant="secondary" onClick={() => handleUpdate(id)}>
+            Save
+          </Button>
+        )}
+      </div>
     </div>
   );
 };

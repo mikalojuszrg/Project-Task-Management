@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 4rem;
 
   &__welcome {
     text-align: center;
@@ -11,6 +12,18 @@
 
 .tasks {
   display: flex;
-  justify-content: space-between;
-  width: 80%;
+  width: 100%;
+
+  justify-content: center;
+  &__block {
+    width: 30%;
+  }
+
+  &__items {
+    width: 100%;
+    padding-right: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
 }

@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import Task from "../../components/Task/Task";
+import CompletedTask from "../../components/CompletedTask/CompletedTask";
 import TaskInput from "../../components/TaskInput/TaskInput";
 import { UserContext } from "../../contexts/UserContext";
 import { useDeleteTask, useTasks } from "../../hooks/tasks";
@@ -30,35 +31,44 @@ const Tasks = () => {
         <TaskInput />
       </div>
       <div className={styles.tasks}>
-        <div>
-          {generalTasks.map((task) => (
-            <Task
-              key={task.id}
-              task={task.task}
-              id={task.id}
-              handleDelete={() => handleDelete(task.id)}
-            />
-          ))}
+        <div className={styles.tasks__block}>
+          <h2>To-Do</h2>
+          <div className={styles.tasks__items}>
+            {generalTasks.map((task) => (
+              <Task
+                key={task.id}
+                task={task.task}
+                id={task.id}
+                handleDelete={() => handleDelete(task.id)}
+              />
+            ))}
+          </div>
         </div>
-        <div>
-          {importantTasks.map((task) => (
-            <Task
-              key={task.id}
-              task={task.task}
-              id={task.id}
-              handleDelete={() => handleDelete(task.id)}
-            />
-          ))}
+        <div className={styles.tasks__block}>
+          <h2>Important</h2>
+          <div className={styles.tasks__items}>
+            {importantTasks.map((task) => (
+              <Task
+                key={task.id}
+                task={task.task}
+                id={task.id}
+                handleDelete={() => handleDelete(task.id)}
+              />
+            ))}
+          </div>
         </div>
-        <div>
-          {completedTasks.map((task) => (
-            <Task
-              key={task.id}
-              task={task.task}
-              id={task.id}
-              handleDelete={() => handleDelete(task.id)}
-            />
-          ))}
+        <div className={styles.tasks__block}>
+          <h2>Completed</h2>
+          <div className={styles.tasks__items}>
+            {completedTasks.map((task) => (
+              <CompletedTask
+                key={task.id}
+                task={task.task}
+                id={task.id}
+                handleDelete={() => handleDelete(task.id)}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

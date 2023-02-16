@@ -1,76 +1,35 @@
-import { useContext } from "react";
-import Task from "../../components/Task/Task";
-import CompletedTask from "../../components/CompletedTask/CompletedTask";
+import { useContext, useEffect, useState } from "react";
 import TaskInput from "../../components/TaskInput/TaskInput";
 import { UserContext } from "../../contexts/UserContext";
-import { useDeleteTask, useTasks } from "../../hooks/tasks";
-import { getCompletedTasks } from "../../utils/completedTasks";
-import { getGeneralTasks } from "../../utils/generalTasks";
-import { getImportantTasks } from "../../utils/importantTasks";
 import styles from "./Tasks.module.scss";
+import TasksListHorizontal from "../../components/TasksListHorizontal/TasksListHorizontal";
+import TasksListVertical from "../../components/TasksListVertical/TasksListVertical";
 
 const Tasks = () => {
   const { user } = useContext(UserContext);
-  const { name, username } = user;
-  const { mutateAsync: deleteTask } = useDeleteTask();
-  const { data, refetch } = useTasks();
-  const tasks = data ? data.filter((task) => task.username === username) : [];
+  const { name } = user;
 
-  const importantTasks = getImportantTasks(tasks);
-  const generalTasks = getGeneralTasks(tasks);
-  const completedTasks = getCompletedTasks(tasks);
+  const [screenChange, setScreenChange] = useState(true);
 
-  const handleDelete = async (id) => {
-    await deleteTask(id);
-    await refetch();
-  };
+  useEffect(() => {
+    const handleWindowResize = () => {
+      if (window.innerWidth > 768) {
+        setScreenChange(false);
+      }
+    };
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, [screenChange]);
+
   return (
     <section className={styles.container}>
       <div className={styles.container__newTask}>
         <h2 className={styles.container__welcome}>Welcome, {name}!</h2>
         <TaskInput />
       </div>
-      <div className={styles.tasks}>
-        <div className={styles.tasks__block}>
-          <h2>To-Do</h2>
-          <div className={styles.tasks__items}>
-            {generalTasks.map((task) => (
-              <Task
-                key={task.id}
-                task={task.task}
-                id={task.id}
-                handleDelete={() => handleDelete(task.id)}
-              />
-            ))}
-          </div>
-        </div>
-        <div className={styles.tasks__block}>
-          <h2>Important</h2>
-          <div className={styles.tasks__items}>
-            {importantTasks.map((task) => (
-              <Task
-                key={task.id}
-                task={task.task}
-                id={task.id}
-                handleDelete={() => handleDelete(task.id)}
-              />
-            ))}
-          </div>
-        </div>
-        <div className={styles.tasks__block}>
-          <h2>Completed</h2>
-          <div className={styles.tasks__items}>
-            {completedTasks.map((task) => (
-              <CompletedTask
-                key={task.id}
-                task={task.task}
-                id={task.id}
-                handleDelete={() => handleDelete(task.id)}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
+      {screenChange ? <TasksListHorizontal /> : <TasksListVertical />}
     </section>
   );
 };

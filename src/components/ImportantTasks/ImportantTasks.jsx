@@ -1,10 +1,11 @@
 import { useDeleteTask, useTasks } from "../../hooks/tasks";
+import { getImportantTasks } from "../../utils/importantTasks";
 import Task from "../Task/Task";
-import styles from "./TasksList.module.scss";
+import styles from "./ImportantTasks.module.scss";
 
-const TasksList = (tasks) => {
-  const { mutateAsync: deleteTask } = useDeleteTask();
+const ImportantTasks = () => {
   const { refetch } = useTasks();
+  const { mutateAsync: deleteTask } = useDeleteTask();
 
   const handleDelete = async (id) => {
     await deleteTask(id);
@@ -12,8 +13,8 @@ const TasksList = (tasks) => {
   };
 
   return (
-    <div>
-      {tasks.map((task) => (
+    <div className={styles.tasks__items}>
+      {getImportantTasks.map((task) => (
         <Task
           key={task.id}
           task={task.task}
@@ -25,4 +26,4 @@ const TasksList = (tasks) => {
   );
 };
 
-export default TasksList;
+export default ImportantTasks;

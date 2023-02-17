@@ -7,15 +7,15 @@ const TasksListHorizontal = () => {
   return (
     <div className={styles.tasks}>
       <div className={styles.tasks__block}>
-        <h2>To-Do</h2>
+        <h2 className={styles.tasks__heading}>To-Do</h2>
         <GeneralTasks />
       </div>
       <div className={styles.tasks__block}>
-        <h2>Important</h2>
+        <h2 className={styles.tasks__heading}>Important</h2>
         <ImportantTasks />
       </div>
       <div className={styles.tasks__block}>
-        <h2>Completed</h2>
+        <h2 className={styles.tasks__heading}>Completed</h2>
         <CompletedTasks />
       </div>
     </div>

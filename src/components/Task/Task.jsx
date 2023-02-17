@@ -27,17 +27,27 @@ const Task = ({ id, task, handleDelete }) => {
 
   const handleUpdate = async (id) => {
     const taskImportant = tasks.find((task) => task.id === id);
-    const taskToUpdate = {
-      id: id,
-      newValue: newValue,
-      username: username,
-      important: taskImportant.important,
-    };
+    let taskToUpdate;
+    if (taskImportant.important) {
+      taskToUpdate = {
+        id: id,
+        newValue: newValue,
+        username: username,
+        important: taskImportant.important,
+      };
+    } else {
+      taskToUpdate = {
+        id: id,
+        newValue: newValue,
+        username: username,
+      };
+    }
     console.log("handleUpdate taskToUpdate:", taskToUpdate);
     try {
       await updateTask(taskToUpdate);
       setIsUpdating(false);
       await refetch();
+      // setIsUpdating(false);
     } catch (error) {
       console.error(error);
     }

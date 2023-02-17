@@ -1,11 +1,20 @@
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 import { useDeleteTask, useTasks } from "../../hooks/tasks";
 import { getGeneralTasks } from "../../utils/generalTasks";
 import Task from "../Task/Task";
 import styles from "./GeneralTasks.module.scss";
 
 const GeneralTasks = () => {
-  const { refetch } = useTasks();
+  const { refetch, data } = useTasks();
   const { mutateAsync: deleteTask } = useDeleteTask();
+
+  const { user } = useContext(UserContext);
+  const { username } = user;
+
+  const tasks = data ? data.filter((task) => task.username === username) : [];
+
+  const generalTasks = getGeneralTasks(tasks);
 
   const handleDelete = async (id) => {
     await deleteTask(id);
@@ -14,7 +23,7 @@ const GeneralTasks = () => {
 
   return (
     <div className={styles.tasks__items}>
-      {getGeneralTasks.map((task) => (
+      {generalTasks.map((task) => (
         <Task
           key={task.id}
           task={task.task}

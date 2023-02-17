@@ -1,11 +1,20 @@
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 import { useDeleteTask, useTasks } from "../../hooks/tasks";
 import { getImportantTasks } from "../../utils/importantTasks";
 import Task from "../Task/Task";
 import styles from "./ImportantTasks.module.scss";
 
 const ImportantTasks = () => {
-  const { refetch } = useTasks();
+  const { refetch, data } = useTasks();
   const { mutateAsync: deleteTask } = useDeleteTask();
+
+  const { user } = useContext(UserContext);
+  const { username } = user;
+
+  const tasks = data ? data.filter((task) => task.username === username) : [];
+
+  const importantTasks = getImportantTasks(tasks);
 
   const handleDelete = async (id) => {
     await deleteTask(id);
@@ -14,7 +23,7 @@ const ImportantTasks = () => {
 
   return (
     <div className={styles.tasks__items}>
-      {getImportantTasks.map((task) => (
+      {importantTasks.map((task) => (
         <Task
           key={task.id}
           task={task.task}

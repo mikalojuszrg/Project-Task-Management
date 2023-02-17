@@ -13,8 +13,10 @@ const Tasks = () => {
 
   useEffect(() => {
     const handleWindowResize = () => {
-      if (window.innerWidth > 768) {
+      if (window.innerWidth < 768) {
         setScreenChange(false);
+      } else {
+        setScreenChange(true);
       }
     };
     window.addEventListener("resize", handleWindowResize);

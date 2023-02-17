@@ -1,8 +1,14 @@
+@import "../../sass/mixins/mediaQueries.scss";
+
 .container {
   border: 1px solid black;
   border-radius: 1.3rem;
   padding: 1rem;
-  width: 20rem;
+  width: 25rem;
+
+  @include medium {
+    width: 20rem;
+  }
 
   &__buttons {
     display: flex;

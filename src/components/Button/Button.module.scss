@@ -22,7 +22,13 @@
     padding: 0.5rem 0rem;
 
     &:hover {
-      background-color: aliceblue;
+      background-color: color.$base-color-light;
     }
+  }
+
+  &--tertiary {
+    padding: 0.57em;
+    background-color: color.$primary-color-dark;
+    color: color.$primary-color-light;
   }
 }

@@ -1,5 +1,5 @@
 const Input = (props) => {
-  return <input {...props} />;
+  return <input maxLength="24" {...props} />;
 };
 
 export default Input;

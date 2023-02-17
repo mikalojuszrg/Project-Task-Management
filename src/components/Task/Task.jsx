@@ -12,6 +12,7 @@ import {
 } from "../../hooks/tasks";
 import Button from "../Button/Button";
 import styles from "./Task.module.scss";
+import UpdateInput from "../UpdateInput/UpdateInput";
 
 const Task = ({ id, task, handleDelete }) => {
   const { user } = useContext(UserContext);
@@ -42,12 +43,10 @@ const Task = ({ id, task, handleDelete }) => {
         username: username,
       };
     }
-    console.log("handleUpdate taskToUpdate:", taskToUpdate);
     try {
       await updateTask(taskToUpdate);
       setIsUpdating(false);
       await refetch();
-      // setIsUpdating(false);
     } catch (error) {
       console.error(error);
     }
@@ -74,9 +73,13 @@ const Task = ({ id, task, handleDelete }) => {
   return (
     <div className={styles.container}>
       {isUpdating ? (
-        <input value={newValue} onChange={(e) => setNewValue(e.target.value)} />
+        <UpdateInput
+          value={newValue}
+          onChange={(e) => setNewValue(e.target.value)}
+          onClick={() => handleUpdate(id)}
+        />
       ) : (
-        <h2>{task}</h2>
+        <h2 className={styles.container__heading}>{task}</h2>
       )}
       <div className={styles.container__buttons}>
         <Button variant="secondary" onClick={handleDelete}>
@@ -91,11 +94,6 @@ const Task = ({ id, task, handleDelete }) => {
         <Button variant="secondary" onClick={() => handleCompleted(id)}>
           <AiOutlineCheckCircle style={{ fill: "#12ac0d" }} />
         </Button>
-        {isUpdating && (
-          <Button variant="secondary" onClick={() => handleUpdate(id)}>
-            Save
-          </Button>
-        )}
       </div>
     </div>
   );

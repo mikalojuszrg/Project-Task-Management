@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  &__input {
+    width: 100%;
+    padding: 0.7rem;
+    border-radius: 0.5rem;
+    border: 0;
+    outline: 0;
+  }
+
+  Button {
+    margin-left: -2rem;
+  }
+}

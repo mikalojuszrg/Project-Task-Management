@@ -31,4 +31,52 @@
     background-color: color.$primary-color-dark;
     color: color.$primary-color-light;
   }
+
+  &--general {
+    color: color.$general-color;
+    background-color: transparent;
+    border: 1px solid color.$general-color;
+    border-radius: 0.5rem;
+    padding: 1rem;
+  }
+
+  &--generalOn {
+    background-color: color.$general-color;
+    color: color.$primary-color-light;
+    border: 1px solid color.$general-color;
+    border-radius: 0.5rem;
+    padding: 1rem;
+  }
+
+  &--important {
+    color: color.$important-color;
+    background-color: transparent;
+    border: 1px solid color.$important-color;
+    border-radius: 0.5rem;
+    padding: 1rem;
+  }
+
+  &--importantOn {
+    background-color: color.$important-color;
+    color: color.$primary-color-light;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid color.$important-color;
+  }
+
+  &--completed {
+    color: color.$completed-color;
+    background-color: transparent;
+    border: 1px solid color.$completed-color;
+    border-radius: 0.5rem;
+    padding: 1rem;
+  }
+
+  &--completedOn {
+    background-color: color.$completed-color;
+    color: color.$primary-color-light;
+    border: 1px solid color.$completed-color;
+    border-radius: 0.5rem;
+    padding: 1rem;
+  }
 }

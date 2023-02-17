@@ -9,7 +9,7 @@ const Tasks = () => {
   const { user } = useContext(UserContext);
   const { name } = user;
 
-  const [screenChange, setScreenChange] = useState(true);
+  const [screenChange, setScreenChange] = useState(window.innerWidth >= 768);
 
   useEffect(() => {
     const handleWindowResize = () => {
